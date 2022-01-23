@@ -86,6 +86,7 @@ class MainActivity : AppCompatActivity() {
                                 "LastUpdate: " + item.lastUpdate
                         countryReportView.text = info
                         Log.d("Response", "countrylist size : ${countryList.size}")
+                        Handler(Looper.getMainLooper()).postDelayed({
                         val intent = Intent(this@MainActivity, LauncherActivity::class.java)
                         val pendingIntent = PendingIntent.getActivity(
                             this@MainActivity,
@@ -108,8 +109,8 @@ class MainActivity : AppCompatActivity() {
                                 .setContentText("Report is ready")
                                 .setSmallIcon(R.drawable.ic_launcher_round)
                                 .setContentIntent(pendingIntent)
-                            //val handler= Handler(Looper.getMainLooper()).postDelayed({
-                            //},30000)
+                                .setAutoCancel(true)
+                            
                         } else {
 
                             builder = Notification.Builder(this@MainActivity)
@@ -117,11 +118,11 @@ class MainActivity : AppCompatActivity() {
                                 .setContentText("Report is ready")
                                 .setSmallIcon(R.drawable.ic_launcher_round)
                                 .setContentIntent(pendingIntent)
-                           //val handler= Handler(Looper.getMainLooper()).postDelayed({
-                            //},30000)
+                           
 
                         }
                         notificationManager.notify(1234, builder.build())
+                        }, 30000)
 
                     } else {
                         Toast.makeText(
